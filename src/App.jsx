@@ -10,7 +10,7 @@ function App() {
     <div>
       <header className="bg-blue-500 text-white p-4 shadow-lg sticky top-0 z-50">
         <div className="container mx-auto flex justify-between items-center">
-          <span className="text-sm italic">My website</span>{" "}
+          <span className="text-sm italic">My website</span>
           <Link
             to="/"
             className="text-xl font-bold hover:text-gray-300 transition-all duration-300 animate-bounce"
@@ -18,6 +18,20 @@ function App() {
           >
             Home
           </Link>
+          <div className="flex space-x-4">
+            <Link
+              to="/register"
+              className="text-white hover:text-gray-300 transition-all duration-300 font-semibold"
+            >
+              REGISTER
+            </Link>
+            <Link
+              to="/login"
+              className="text-white hover:text-gray-300 transition-all duration-300 font-semibold"
+            >
+              LOGIN
+            </Link>
+          </div>
         </div>
       </header>
 
