@@ -1,7 +1,9 @@
-import React, { useRef } from "react";
+import React, { useRef, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 
 function Login() {
+  const [showPassword, setShowPassword] = useState(false);
+
   const usernameRef = useRef();
   const passwordRef = useRef();
 
@@ -9,7 +11,7 @@ function Login() {
 
   function validate() {
     if (usernameRef.current.value.length < 3) {
-      alert("username is not valid");
+      alert("Username is not valid");
       usernameRef.current.focus();
       usernameRef.current.style.outlineColor = "red";
       return false;
@@ -44,9 +46,10 @@ function Login() {
           data.message !== "User Not found." &&
           data.message !== "Invalid Password!"
         ) {
-          // Inputlarni tozalash
+      
           usernameRef.current.value = "";
           passwordRef.current.value = "";
+          navigate("/");
         }
 
         if (
@@ -73,12 +76,21 @@ function Login() {
           type="text"
           placeholder="Enter username..."
         />
-        <input
-          ref={passwordRef}
-          className="border border-gray-300 rounded-md p-3 w-full mb-4 focus:ring-2 focus:ring-blue-400 focus:outline-none"
-          type="password"
-          placeholder="Enter password..."
-        />
+       
+        <div className="relative mb-4">
+          <input
+            ref={passwordRef}
+            className="border border-gray-300 rounded-md p-3 w-full focus:ring-2 focus:ring-blue-400 focus:outline-none"
+            type={showPassword ? "text" : "password"} 
+            placeholder="Enter password..."
+          />
+          <span
+            onClick={() => setShowPassword(!showPassword)}
+            className="absolute right-3 top-3 cursor-pointer text-gray-500"
+          >
+            {showPassword ? "👁️" : "👁️‍🗨️"}
+          </span>
+        </div>
 
         <button
           className="w-full bg-blue-500 hover:bg-blue-600 text-white font-bold py-3 px-4 rounded-lg transition-all duration-300"

@@ -1,7 +1,10 @@
-import React, { useRef } from "react";
+import React, { useState, useRef } from "react";
 import { Link, useNavigate } from "react-router-dom";
 
 function Register() {
+  const [showPassword, setShowPassword] = useState(false);
+  const [showRePassword, setShowRePassword] = useState(false);
+
   const usernameRef = useRef();
   const emailRef = useRef();
   const passwordRef = useRef();
@@ -114,18 +117,36 @@ function Register() {
           type="email"
           placeholder="Enter Email..."
         />
-        <input
-          className="border border-gray-300 rounded-md p-3 w-full mb-4 focus:ring-2 focus:ring-blue-400 focus:outline-none"
-          ref={passwordRef}
-          type="password"
-          placeholder="Enter password..."
-        />
-        <input
-          className="border border-gray-300 rounded-md p-3 w-full mb-4 focus:ring-2 focus:ring-blue-400 focus:outline-none"
-          ref={rePasswordRef}
-          type="password"
-          placeholder="Enter again password..."
-        />
+
+        <div className="relative mb-4">
+          <input
+            className="border border-gray-300 rounded-md p-3 w-full focus:ring-2 focus:ring-blue-400 focus:outline-none"
+            ref={passwordRef}
+            type={showPassword ? "text" : "password"}
+            placeholder="Enter password..."
+          />
+          <span
+            onClick={() => setShowPassword(!showPassword)}
+            className="absolute right-3 top-3 cursor-pointer text-gray-500"
+          >
+            {showPassword ? "👁️" : "👁️‍🗨️"}
+          </span>
+        </div>
+        {/* Re-Password input with toggle */}
+        <div className="relative mb-4">
+          <input
+            className="border border-gray-300 rounded-md p-3 w-full focus:ring-2 focus:ring-blue-400 focus:outline-none"
+            ref={rePasswordRef}
+            type={showRePassword ? "text" : "password"}
+            placeholder="Enter again password..."
+          />
+          <span
+            onClick={() => setShowRePassword(!showRePassword)}
+            className="absolute right-3 top-3 cursor-pointer text-gray-500"
+          >
+            {showRePassword ? "👁️" : "👁️‍🗨️"}
+          </span>
+        </div>
 
         <button
           className="w-full bg-blue-500 hover:bg-blue-600 text-white font-bold py-3 px-4 rounded-lg transition-all duration-300"
